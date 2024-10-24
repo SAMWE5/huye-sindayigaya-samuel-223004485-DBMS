@@ -1,0 +1,386 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE sam;
+Database changed
+mysql> create table test (id int,gender char(20),marks int,status char(20), school char(15),department char(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>  create table test ('id' int,'gender' char(20),'marks' int,'status' char(20),' school' char(15),'department' char(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''id' int,'gender' char(20),'marks' int,'status' char(20),' school' char(15),'dep' at line 1
+mysql>  create table test (id int,gender varchar(20),marks int,status varchar(20), school varchar(15),department varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| huye               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sam                |
+| sys                |
++--------------------+
+6 rows in set (0.06 sec)
+
+mysql> use sam;
+Database changed
+mysql> show tables;
+Empty set (0.03 sec)
+
+mysql>  create table test (id int(4),gender varchar(20),marks int,status varchar(20), school varchar(15),department varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>  create table test (id int(4),gender varchar(20),marks int(4),status varchar(20), school varchar(15),department varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>  create table test (id int(4),gender varchar(20),marks int(4),status varchar(20), school varchar(15),department varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> insert into test value('001','male','22','married','ur','bit','computing');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into test values('001','male','22','married','ur','bit');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into test('002','female','21','single','uok','accounting');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''002','female','21','single','uok','accounting')' at line 1
+mysql> show tables;
++---------------+
+| Tables_in_sam |
++---------------+
+| test          |
++---------------+
+1 row in set (0.02 sec)
+
+mysql> select* from test;
++------+--------+-------+---------+--------+------------+
+| id   | gender | marks | status  | school | department |
++------+--------+-------+---------+--------+------------+
+|    1 | male   |    22 | married | ur     | bit        |
++------+--------+-------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> alter table test add column grade;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table test add column name varchar(20);
+Query OK, 1 row affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select* from test;
++------+--------+-------+---------+--------+------------+------+
+| id   | gender | marks | status  | school | department | name |
++------+--------+-------+---------+--------+------------+------+
+|    1 | male   |    22 | married | ur     | bit        | NULL |
++------+--------+-------+---------+--------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO test value('002','female','23','single','uok','acc','san');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from test;
++------+--------+-------+---------+--------+------------+------+
+| id   | gender | marks | status  | school | department | name |
++------+--------+-------+---------+--------+------------+------+
+|    1 | male   |    22 | married | ur     | bit        | NULL |
+|    2 | female |    23 | single  | uok    | acc        | san  |
++------+--------+-------+---------+--------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select ID,MARKS,DEPARTMENT From test;
++------+-------+------------+
+| ID   | MARKS | DEPARTMENT |
++------+-------+------------+
+|    1 |    22 | bit        |
+|    2 |    23 | acc        |
++------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into test value('003','female','15','single','ulk','data','kashmir');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from test;
++------+--------+-------+---------+--------+------------+---------+
+| id   | gender | marks | status  | school | department | name    |
++------+--------+-------+---------+--------+------------+---------+
+|    1 | male   |    22 | married | ur     | bit        | NULL    |
+|    2 | female |    23 | single  | uok    | acc        | san     |
+|    3 | female |    15 | single  | ulk    | data       | kashmir |
++------+--------+-------+---------+--------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into test value('004','male','26','separated','makelele','nursing','alice');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from test;
++------+--------+-------+-----------+----------+------------+---------+
+| id   | gender | marks | status    | school   | department | name    |
++------+--------+-------+-----------+----------+------------+---------+
+|    1 | male   |    22 | married   | ur       | bit        | NULL    |
+|    2 | female |    23 | single    | uok      | acc        | san     |
+|    3 | female |    15 | single    | ulk      | data       | kashmir |
+|    4 | male   |    26 | separated | makelele | nursing    | alice   |
++------+--------+-------+-----------+----------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select* from test WHERE school='ulk' AND name='kashmir';
++------+--------+-------+--------+--------+------------+---------+
+| id   | gender | marks | status | school | department | name    |
++------+--------+-------+--------+--------+------------+---------+
+|    3 | female |    15 | single | ulk    | data       | kashmir |
++------+--------+-------+--------+--------+------------+---------+
+1 row in set (0.01 sec)
+
+mysql> select* from test WHERE gender='female' OR status='single';
++------+--------+-------+--------+--------+------------+---------+
+| id   | gender | marks | status | school | department | name    |
++------+--------+-------+--------+--------+------------+---------+
+|    2 | female |    23 | single | uok    | acc        | san     |
+|    3 | female |    15 | single | ulk    | data       | kashmir |
++------+--------+-------+--------+--------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table employee(id int(5),f.name varchar(20),l.name varchar(20),course varchar(23),dob date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(20),l.name varchar(20),course varchar(23),dob date)' at line 1
+mysql> create table employee(id int(5),f.name varchar(20),l.name varchar(20),course varchar(23));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(20),l.name varchar(20),course varchar(23))' at line 1
+mysql> create table employee(id int(5),f.name varchar(20),l.name varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(20),l.name varchar(20))' at line 1
+mysql> create table employee(id int(5),name varchar(20),course varchar(13));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into employee value('1','kakuze','chemistry';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>  insert into employee value('110','munana','math');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create database ruhande;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use ruhande;
+Database changed
+mysql> create table ngoma(id int(16),f.name varchar(20),l.name varchar(30),gender varchar(30),province varchar(20),district varchar(23),sector varchar(28),cell varchar(18),village varchar(26),email varchar(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(20),l.name varchar(30),gender varchar(30),province varchar(20),dis' at line 1
+mysql> ngoma(id int(16),f.name varchar(20),l.name varchar(30),gender varchar(30),province varchar(20),district varchar(23),sector varchar(28),cell varchar(18),village varchar(26),email varchar(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ngoma(id int(16),f.name varchar(20),l.name varchar(30),gender varchar(30),provin' at line 1
+mysql>  create table ngoma(id int(16),f.name varchar(20),l.name varchar(30),gender varchar(30),province varchar(20),district varchar(23),sector varchar(28),cell varchar(18),village varchar(26),email varchar(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(20),l.name varchar(30),gender varchar(30),province varchar(20),dis' at line 1
+mysql> create table ngoma( id int(16) primary key,f.name varchar(13),l.name varchar(15),gender varchar(20),province varchar(18),district varchar(15),sector varchar(25),cell varchar(20),email varchar(21));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(13),l.name varchar(15),gender varchar(20),province varchar(18),dis' at line 1
+mysql>  create table ngoma( id int(16) primary key,f.name varchar(31),l.name varchar(50),gender varchar(20),province varchar(80),district varchar(51),sector varchar(25),cell varchar(20),email varchar(21));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name varchar(31),l.name varchar(50),gender varchar(20),province varchar(80),dis' at line 1
+mysql>  create table ngoma( id int(16) primary key,f.name char(13),l.name char(15),gender char(20),province char(18),district char(15),sector char(25),cell char(20),email char(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name char(13),l.name char(15),gender char(20),province char(18),district char(1' at line 1
+mysql> create table ngoma( id int(16) primary key,f.name char(53),l.name char(45),gender char(60),province char(68),district char(45),sector char(55),cell char(80),email char(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name char(53),l.name char(45),gender char(60),province char(68),district char(4' at line 1
+mysql>  create table ngoma( id int(16) primary key,f.name char(53),l.name char(45),gender char(60),province char(68),district char(45),sector char(55),cell char(80),email char(50),tel int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.name char(53),l.name char(45),gender char(60),province char(68),district char(4' at line 1
+mysql> create table ngoma(id int(16),firstname varchar(20),lastname varchar(20),gender varchar(10),province varchar(20),district varchar(20),cell varchar(19),email varchar(50),telephone int(12));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> insert into ngoma value('1111','kayijuka','andre','male','southern','huye','cyarwa','kayi@gmail.com','078356738');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show ngoma;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ngoma' at line 1
+mysql> select* from ngoma;
++------+-----------+----------+--------+----------+----------+--------+----------------+-----------+
+| id   | firstname | lastname | gender | province | district | cell   | email          | telephone |
++------+-----------+----------+--------+----------+----------+--------+----------------+-----------+
+| 1111 | kayijuka  | andre    | male   | southern | huye     | cyarwa | kayi@gmail.com |  78356738 |
++------+-----------+----------+--------+----------+----------+--------+----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into ngoma value('22','kaka','ken','female','southern','ngoma','kaka@gmail.com','0987654');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into ngoma value('22','kaka','ken','female','southern','huye','ngoma','kaka@gmail.com','0987654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into ngoma value('22','kakana','clarrise','female','southern','ngoma','km@gmail.com','094384');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into ngoma value('22','kakana','anna','female','southern','huye','ngoma','kaa@gmail.com','00987654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('22','boni','mutabazi','male','southern','huye','ngoma','mutaba@gmail.com','1287654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('22','gabliera','mutoni','female','southern','huye','ngoma','a@gmail.com','06354654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('21','faustin','kanani','male','southern','huye','ngoma','kanani@gmail.com','0234654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from ngoma;
++------+-----------+----------+--------+----------+----------+--------+------------------+-----------+
+| id   | firstname | lastname | gender | province | district | cell   | email            | telephone |
++------+-----------+----------+--------+----------+----------+--------+------------------+-----------+
+| 1111 | kayijuka  | andre    | male   | southern | huye     | cyarwa | kayi@gmail.com   |  78356738 |
+|   22 | kaka      | ken      | female | southern | huye     | ngoma  | kaka@gmail.com   |    987654 |
+|   22 | kakana    | anna     | female | southern | huye     | ngoma  | kaa@gmail.com    |    987654 |
+|   22 | boni      | mutabazi | male   | southern | huye     | ngoma  | mutaba@gmail.com |   1287654 |
+|   22 | gabliera  | mutoni   | female | southern | huye     | ngoma  | a@gmail.com      |   6354654 |
+|   21 | faustin   | kanani   | male   | southern | huye     | ngoma  | kanani@gmail.com |    234654 |
++------+-----------+----------+--------+----------+----------+--------+------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> insert into ngoma value('23','karara','claudine','female','southern','huye','ngoma','karara@gmail.com','234567654');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('2234','omar','nsabagasani','male','southern','huye','mukoni','nsabagasani@gmail.com','090984');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('24324','ntwali','kavuna','male','southern','huye','agasengasenge','ntwali@gmail.com','45673454');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ngoma value('32','samuel','sindayigaya','male','southern','huye','karama','samuel@gmail.com','0546754');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from ngoma;
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+
+| id    | firstname | lastname    | gender | province | district | cell          | email                 | telephone |
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+
+|  1111 | kayijuka  | andre       | male   | southern | huye     | cyarwa        | kayi@gmail.com        |  78356738 |
+|    22 | kaka      | ken         | female | southern | huye     | ngoma         | kaka@gmail.com        |    987654 |
+|    22 | kakana    | anna        | female | southern | huye     | ngoma         | kaa@gmail.com         |    987654 |
+|    22 | boni      | mutabazi    | male   | southern | huye     | ngoma         | mutaba@gmail.com      |   1287654 |
+|    22 | gabliera  | mutoni      | female | southern | huye     | ngoma         | a@gmail.com           |   6354654 |
+|    21 | faustin   | kanani      | male   | southern | huye     | ngoma         | kanani@gmail.com      |    234654 |
+|    23 | karara    | claudine    | female | southern | huye     | ngoma         | karara@gmail.com      | 234567654 |
+|  2234 | omar      | nsabagasani | male   | southern | huye     | mukoni        | nsabagasani@gmail.com |     90984 |
+| 24324 | ntwali    | kavuna      | male   | southern | huye     | agasengasenge | ntwali@gmail.com      |  45673454 |
+|    32 | samuel    | sindayigaya | male   | southern | huye     | karama        | samuel@gmail.com      |    546754 |
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> alter table ngoma add column sector varchar(20);
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select* from ngoma;
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+--------+
+| id    | firstname | lastname    | gender | province | district | cell          | email                 | telephone | sector |
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+--------+
+|  1111 | kayijuka  | andre       | male   | southern | huye     | cyarwa        | kayi@gmail.com        |  78356738 | NULL   |
+|    22 | kaka      | ken         | female | southern | huye     | ngoma         | kaka@gmail.com        |    987654 | NULL   |
+|    22 | kakana    | anna        | female | southern | huye     | ngoma         | kaa@gmail.com         |    987654 | NULL   |
+|    22 | boni      | mutabazi    | male   | southern | huye     | ngoma         | mutaba@gmail.com      |   1287654 | NULL   |
+|    22 | gabliera  | mutoni      | female | southern | huye     | ngoma         | a@gmail.com           |   6354654 | NULL   |
+|    21 | faustin   | kanani      | male   | southern | huye     | ngoma         | kanani@gmail.com      |    234654 | NULL   |
+|    23 | karara    | claudine    | female | southern | huye     | ngoma         | karara@gmail.com      | 234567654 | NULL   |
+|  2234 | omar      | nsabagasani | male   | southern | huye     | mukoni        | nsabagasani@gmail.com |     90984 | NULL   |
+| 24324 | ntwali    | kavuna      | male   | southern | huye     | agasengasenge | ntwali@gmail.com      |  45673454 | NULL   |
+|    32 | samuel    | sindayigaya | male   | southern | huye     | karama        | samuel@gmail.com      |    546754 | NULL   |
++-------+-----------+-------------+--------+----------+----------+---------------+-----------------------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> alter table ngoma drop column cell;
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select* from ngoma;
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+| id    | firstname | lastname    | gender | province | district | email                 | telephone | sector |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+|  1111 | kayijuka  | andre       | male   | southern | huye     | kayi@gmail.com        |  78356738 | NULL   |
+|    22 | kaka      | ken         | female | southern | huye     | kaka@gmail.com        |    987654 | NULL   |
+|    22 | kakana    | anna        | female | southern | huye     | kaa@gmail.com         |    987654 | NULL   |
+|    22 | boni      | mutabazi    | male   | southern | huye     | mutaba@gmail.com      |   1287654 | NULL   |
+|    22 | gabliera  | mutoni      | female | southern | huye     | a@gmail.com           |   6354654 | NULL   |
+|    21 | faustin   | kanani      | male   | southern | huye     | kanani@gmail.com      |    234654 | NULL   |
+|    23 | karara    | claudine    | female | southern | huye     | karara@gmail.com      | 234567654 | NULL   |
+|  2234 | omar      | nsabagasani | male   | southern | huye     | nsabagasani@gmail.com |     90984 | NULL   |
+| 24324 | ntwali    | kavuna      | male   | southern | huye     | ntwali@gmail.com      |  45673454 | NULL   |
+|    32 | samuel    | sindayigaya | male   | southern | huye     | samuel@gmail.com      |    546754 | NULL   |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select* from ngoma WHERE firstname='samuel' AND lastname='sindayigaya';
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+| id   | firstname | lastname    | gender | province | district | email            | telephone | sector |
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+|   32 | samuel    | sindayigaya | male   | southern | huye     | samuel@gmail.com |    546754 | NULL   |
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select* from ngoma WHERE email='samuel@gmail.com' OR GENDER='female';
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+| id   | firstname | lastname    | gender | province | district | email            | telephone | sector |
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+|   22 | kaka      | ken         | female | southern | huye     | kaka@gmail.com   |    987654 | NULL   |
+|   22 | kakana    | anna        | female | southern | huye     | kaa@gmail.com    |    987654 | NULL   |
+|   22 | gabliera  | mutoni      | female | southern | huye     | a@gmail.com      |   6354654 | NULL   |
+|   23 | karara    | claudine    | female | southern | huye     | karara@gmail.com | 234567654 | NULL   |
+|   32 | samuel    | sindayigaya | male   | southern | huye     | samuel@gmail.com |    546754 | NULL   |
++------+-----------+-------------+--------+----------+----------+------------------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter table ngoma RENAME column gender ton sex;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ton sex' at line 1
+mysql> alter table ngoma RENAME column gender to sex;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select* from ngoma;
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+| id    | firstname | lastname    | sex    | province | district | email                 | telephone | sector |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+|  1111 | kayijuka  | andre       | male   | southern | huye     | kayi@gmail.com        |  78356738 | NULL   |
+|    22 | kaka      | ken         | female | southern | huye     | kaka@gmail.com        |    987654 | NULL   |
+|    22 | kakana    | anna        | female | southern | huye     | kaa@gmail.com         |    987654 | NULL   |
+|    22 | boni      | mutabazi    | male   | southern | huye     | mutaba@gmail.com      |   1287654 | NULL   |
+|    22 | gabliera  | mutoni      | female | southern | huye     | a@gmail.com           |   6354654 | NULL   |
+|    21 | faustin   | kanani      | male   | southern | huye     | kanani@gmail.com      |    234654 | NULL   |
+|    23 | karara    | claudine    | female | southern | huye     | karara@gmail.com      | 234567654 | NULL   |
+|  2234 | omar      | nsabagasani | male   | southern | huye     | nsabagasani@gmail.com |     90984 | NULL   |
+| 24324 | ntwali    | kavuna      | male   | southern | huye     | ntwali@gmail.com      |  45673454 | NULL   |
+|    32 | samuel    | sindayigaya | male   | southern | huye     | samuel@gmail.com      |    546754 | NULL   |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select id,lastname,email from ngoma;
++-------+-------------+-----------------------+
+| id    | lastname    | email                 |
++-------+-------------+-----------------------+
+|  1111 | andre       | kayi@gmail.com        |
+|    22 | ken         | kaka@gmail.com        |
+|    22 | anna        | kaa@gmail.com         |
+|    22 | mutabazi    | mutaba@gmail.com      |
+|    22 | mutoni      | a@gmail.com           |
+|    21 | kanani      | kanani@gmail.com      |
+|    23 | claudine    | karara@gmail.com      |
+|  2234 | nsabagasani | nsabagasani@gmail.com |
+| 24324 | kavuna      | ntwali@gmail.com      |
+|    32 | sindayigaya | samuel@gmail.com      |
++-------+-------------+-----------------------+
+10 rows in set (0.00 sec)
+
+mysql> update ngoma set sector='tumba';
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> select* ngoma;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ngoma' at line 1
+mysql> select* from ngoma;
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+| id    | firstname | lastname    | sex    | province | district | email                 | telephone | sector |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+|  1111 | kayijuka  | andre       | male   | southern | huye     | kayi@gmail.com        |  78356738 | tumba  |
+|    22 | kaka      | ken         | female | southern | huye     | kaka@gmail.com        |    987654 | tumba  |
+|    22 | kakana    | anna        | female | southern | huye     | kaa@gmail.com         |    987654 | tumba  |
+|    22 | boni      | mutabazi    | male   | southern | huye     | mutaba@gmail.com      |   1287654 | tumba  |
+|    22 | gabliera  | mutoni      | female | southern | huye     | a@gmail.com           |   6354654 | tumba  |
+|    21 | faustin   | kanani      | male   | southern | huye     | kanani@gmail.com      |    234654 | tumba  |
+|    23 | karara    | claudine    | female | southern | huye     | karara@gmail.com      | 234567654 | tumba  |
+|  2234 | omar      | nsabagasani | male   | southern | huye     | nsabagasani@gmail.com |     90984 | tumba  |
+| 24324 | ntwali    | kavuna      | male   | southern | huye     | ntwali@gmail.com      |  45673454 | tumba  |
+|    32 | samuel    | sindayigaya | male   | southern | huye     | samuel@gmail.com      |    546754 | tumba  |
++-------+-----------+-------------+--------+----------+----------+-----------------------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql>
